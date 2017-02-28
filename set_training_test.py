@@ -7,7 +7,7 @@
 # Modifications	: 1.1 - some modifications
 #							  : 1.2 - some modifications
 
-# Description		: Script to create de necesary directories
+# Description		: Script to create some necesary directories
 #
 
 #	WARNING				: THIS SCRIPT HAVE A SPECIFIC PARAMETERS TO CREATE DIRECTORIES ON MY MACHINE
