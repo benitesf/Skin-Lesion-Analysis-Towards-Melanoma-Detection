@@ -2,7 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.misc
 import os
-
+import pyclipper
+from skimage import io
+from PIL import Image
 """
 This scripts find the axes of an object
 """
@@ -71,28 +73,26 @@ y_sub = y_transformed[index_sub]
 plt.plot(x_over*-1, y_over, 'y.')
 plt.plot(x_sub*-1, y_sub, 'b.')
 """
+
+# Inversa del tumor en sentido del eje x
 x_transformed_reflection = x_transformed*-1
 y_transformed_reflection = y_transformed
 
-x_transformed_reflection = x_transformed_reflection.astype(int)
-y_transformed_reflection = y_transformed_reflection.astype(int)
-
-index =  np.array([])
-
-for idx, val in enumerate(x_transformed_reflection):
-    print(idx, val)
-    if val == x_transformed[idx]:
-        index = np.append(index, idx)
-
 plt.plot(x_transformed_reflection, y_transformed_reflection, 'y.')
 
-equal_x = np.not_equal(x_transformed.astype(int), x_transformed_reflection.astype(int)).nonzero()[0]
+# Encuentra el convex hull
+from scipy.spatial import ConvexHull
 
-x_overlapping = x_transformed[equal_x]
-y_overlapping = y_transformed[equal_x]
+points_t = np.array([x_transformed, y_transformed]).transpose()
+points_tr = np.array([x_transformed_reflection, y_transformed_reflection]).transpose()
+hull_t = ConvexHull(points_t)
+hull_tr = ConvexHull(points_tr)
 
-#plt.plot(x_overlapping, y_overlapping, 'r.')
+plt.plot(points_t[hull_t.vertices,0], points_t[hull_t.vertices,1], 'r--', lw=2)
 
+#for simplex in hull.simplices:
+#    plt.plot(points_t[simplex, 0], points_t[simplex, 1], 'k-')
+#    plt.plot(points_tr[simplex, 0], points_tr[simplex, 1], 'r-')
 
 #d = (y_v1)*x0 + (-x_v1)*y0 # determines if a certain point (x0,y0) is over(d>0) or sub(d<0) to the straight line
 #print(d)
@@ -110,7 +110,6 @@ plt.plot([x_v2*-scale, x_v2*scale],
          [y_v2*-scale, y_v2*scale], color='blue')
 
 plt.plot([0], [0], 'ro')
-plt.plot([0], [100], 'wo')
 
 plt.axis('equal')
 plt.gca().invert_yaxis()

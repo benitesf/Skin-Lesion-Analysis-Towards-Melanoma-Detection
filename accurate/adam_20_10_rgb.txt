@@ -1,0 +1,16 @@
+Accuracy test:
+ n_images: 20	n_sample: 10
+frequency: [0.6, 0.7]	theta: [0, 45]
+
+Extracción de características del train: --- 6.286434888839722 seconds ---
+
+Extracción de características del test: --- 5.515387296676636 seconds ---
+
+Aprendizaje: --- 0.06433415412902832 seconds ---
+
+Score train set: 0.76
+
+Score test set: 0.775
+
+Clasificación de imágenes train y test. 20 imágenes
+Acc train

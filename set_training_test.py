@@ -14,7 +14,7 @@
 #									MAY YOU NEED TO CHANGE IT, IF YOU WANT TO USE IT
 #
 
-import modules.dirhandler as dh
+import util.dirhandler as dh
 
 if __name__ == '__main__':
 	# Create train_data and test_data directory
