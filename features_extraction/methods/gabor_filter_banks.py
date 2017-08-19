@@ -1,9 +1,20 @@
-import numpy as np
 from skimage.filters import gabor_kernel
 from scipy.ndimage.filters import convolve as convolveim
+import numpy as np
+import time
 
 
 class GaborFilter:
+
+    real_time = 0
+    real_cont = 0
+
+    imag_time = 0
+    imag_cont = 0
+
+    magnitude_time = 0
+    magnitude_cont = 0
+
     def __init__(self, frequency, theta, sigma_x, sigma_y):
         """ Instantiate a Gabor kernel
 
@@ -27,19 +38,43 @@ class GaborFilter:
         """
         Returns a image convolved with the real component of the kernel
         """
-        return convolveim(image, np.real(self.kernel), mode='wrap')
+        start_time = time.time()
+        conv = convolveim(image, np.real(self.kernel), mode='wrap')
+        self.real_time += time.time() - start_time
+        self.real_cont += 1
+
+        return conv
 
     def convolve_imag(self, image):
         """
         Returns a image convolved with the imaginary component of the kernel
         """
-        return convolveim(image, np.imag(self.kernel), mode='wrap')
+        start_time = time.time()
+        conv = convolveim(image, np.imag(self.kernel), mode='wrap')
+        self.imag_time += time.time() - start_time
+        self.imag_cont += 1
+
+        return conv
 
     def magnitude(self, image):
         """
         Returns the magnitude value
         """
-        return np.sqrt(self.convolve_real(image) ** 2 + self.convolve_imag(image) ** 2)
+        start_time = time.time()
+        conv = np.sqrt(self.convolve_real(image) ** 2 + self.convolve_imag(image) ** 2)
+        self.magnitude_time += time.time() - start_time
+        self.magnitude_cont += 1
+
+        return conv
+
+    def mean_magnitude_time(self):
+        return self.magnitude_time/self.magnitude_cont
+
+    def mean_real_time(self):
+        return self.real_time/self.real_cont
+
+    def mean_imag_time(self):
+        return self.imag_time/self.imag_cont
 
 
 def gabor_bank(fmax, ns, nd, v=2, b=1.177):

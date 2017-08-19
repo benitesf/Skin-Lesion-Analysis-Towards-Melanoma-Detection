@@ -6,16 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7cb105a-bd47-4d74-b1b2-71e86617bdec" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/features_extraction/advancedExtraction.py" afterPath="$PROJECT_DIR$/features_extraction/methods/advancedExtraction.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/features_extraction/meanRgbGaborExtraction.py" afterPath="$PROJECT_DIR$/features_extraction/methods/meanRgbGaborExtraction.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classification/classification.py" afterPath="$PROJECT_DIR$/classification/classification.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.py" afterPath="$PROJECT_DIR$/config.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features_extraction/feature_extraction.py" afterPath="$PROJECT_DIR$/features_extraction/feature_extraction.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learning/learning.py" afterPath="$PROJECT_DIR$/learning/learning.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/features_extraction/methods/gabor_filter_banks.py" afterPath="$PROJECT_DIR$/features_extraction/methods/gabor_filter_banks.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/dirhandler.py" afterPath="$PROJECT_DIR$/util/dirhandler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/image.py" afterPath="$PROJECT_DIR$/util/image.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,8 +29,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="35" column="30" lean-forward="true" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+            <state relative-caret-position="-94">
+              <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
               <folding>
                 <element signature="e#40#108#0" expanded="true" />
               </folding>
@@ -45,12 +38,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="second_feature_extraction.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/features_extraction/methods/second_feature_extraction.py">
+      <file leaf-file-name="gabor_filter_banks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/features_extraction/methods/gabor_filter_banks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="46" column="20" lean-forward="true" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="645">
+              <caret line="43" column="27" lean-forward="true" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,8 +53,8 @@
       <file leaf-file-name="feature_extraction.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/features_extraction/feature_extraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1380">
-              <caret line="92" column="60" lean-forward="true" selection-start-line="92" selection-start-column="60" selection-end-line="92" selection-end-column="60" />
+            <state relative-caret-position="375">
+              <caret line="85" column="27" lean-forward="true" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
               <folding>
                 <element signature="e#34#125#0" expanded="true" />
               </folding>
@@ -178,11 +173,12 @@
         <option value="$PROJECT_DIR$/util/dirhandler.py" />
         <option value="$PROJECT_DIR$/util/image.py" />
         <option value="$PROJECT_DIR$/features_extraction/methods/first_feature_extraction.py" />
-        <option value="$PROJECT_DIR$/features_extraction/feature_extraction.py" />
         <option value="$PROJECT_DIR$/features_extraction/methods/second_feature_extraction.py" />
         <option value="$PROJECT_DIR$/classification/classification.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/features_extraction/methods/gabor_filter_banks.py" />
+        <option value="$PROJECT_DIR$/features_extraction/feature_extraction.py" />
       </list>
     </option>
   </component>
@@ -247,20 +243,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Skin-Lesion-Analysis-Towards-Melanoma-Detection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Skin-Lesion-Analysis-Towards-Melanoma-Detection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Skin-Lesion-Analysis-Towards-Melanoma-Detection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -895,42 +877,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features_extraction/methods/gabor_filter_banks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/features_extraction/feature_extraction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="92" column="60" lean-forward="true" selection-start-line="92" selection-start-column="60" selection-end-line="92" selection-end-column="60" />
-          <folding>
-            <element signature="e#34#125#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classification/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/util/image.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -951,18 +897,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/classification/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/features_extraction/methods/second_feature_extraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="46" column="20" lean-forward="true" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+        <state relative-caret-position="465">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features_extraction/feature_extraction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="85" column="27" lean-forward="true" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
+          <folding>
+            <element signature="e#34#125#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features_extraction/methods/gabor_filter_banks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" column="27" lean-forward="true" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="35" column="30" lean-forward="true" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+        <state relative-caret-position="-94">
+          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
           <folding>
             <element signature="e#40#108#0" expanded="true" />
           </folding>

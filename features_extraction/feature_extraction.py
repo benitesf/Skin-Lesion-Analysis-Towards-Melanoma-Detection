@@ -82,6 +82,8 @@ class FeatureExtraction:
     def features(self, blk):
         return self.values(blk, self.kernels)
 
+    def get_kernels_bank(self):
+        return self.kernels
 
     def first_gabor_bank(self, params):
         kernels = []
