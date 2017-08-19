@@ -1,18 +1,16 @@
-from learning.NeuralNetwork import NeuralNetwork
+from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import cross_val_score
+import config as cfg
+
+"""
+Implements diferent methods of learning which have a common interface to access
+-------------------------------------------------------------------------------
+"""
 
 
-# Instance a specific learning object
-def get(type):
-    featureType = {'NN': neuralNetwork
-                   }
-    return featureType[type]()
-
-
-# Instance a neural network object
-def neuralNetwork():
-    return NeuralNetwork()
-
-###########
-# Here we can add more functions to instace any learning class
-##########
+def neural_network():
+    classifier = MLPClassifier()
+    for (prop, value) in cfg.learningParams.items():
+        setattr(classifier, prop, value)
+    return classifier
 

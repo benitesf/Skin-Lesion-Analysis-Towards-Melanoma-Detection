@@ -6,6 +6,7 @@ from scipy import ndimage as ndi
 from skimage.filters import gabor_kernel
 import time
 
+
 class MeanRgbGaborExtraction:
 
     def __init__(self):
@@ -46,9 +47,9 @@ class MeanRgbGaborExtraction:
         pix = curr_img.random_central_pixel(border=True)  # [fil, col] get a random pixel from the current image
         blk = curr_img.get_block(pix)  # 25x25 get the block 25x25 from the central pixel
         rgb = self.mean_rgb(blk)  # [mean r, mean g, mean b] calculate means
-        #start_time = time.time()
+        # start_time = time.time()
         gab = self.gabor_filter(blk)  # [gab 0, gab 1, gab 2, gab 3] calculate mean convolve gabor filters
-        #print("--- %s seconds ---" % (time.time() - start_time))
+        # print("--- %s seconds ---" % (time.time() - start_time))
         mel = curr_img.get_ground_pixel(pix)  # [0 or 1] get 0 if current pixel is not melanoma, and 1 otherwise
         return [*rgb, *gab], mel
 
@@ -65,7 +66,7 @@ class MeanRgbGaborExtraction:
         return self.compute_feats(img)
 
     # This method calculate the gabor kernels and return it
-    def kernels(self,params):
+    def kernels(self, params):
         kernels = []
         for frequency in params[0]:
             for theta in params[1]:
