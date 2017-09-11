@@ -37,8 +37,10 @@ class FeatureExtraction:
             A data set X and y, which contents data about the images
 
         """
-        X = np.zeros((cfg.nImage * cfg.nSample, cfg.nCells - 1))
-        y = np.zeros((cfg.nImage * cfg.nSample,))
+        n = len(melanoma)
+
+        X = np.zeros((n * cfg.nSample, cfg.nCells - 1))
+        y = np.zeros((n * cfg.nSample,))
 
         self.kernels = self.first_gabor_bank(cfg.gabor_params)
         self.values = first_values

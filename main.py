@@ -55,9 +55,10 @@ classifier.fit(X_train, y_train)
 """
 Classify images
 ---------------
+---------------
 """
-melanoma_list = [melanoma_test[0]]
-ground_list = [ground_test[0]]
+melanoma_list = melanoma_test[0:2]
+ground_list = ground_test[0:2]
 
 seg = classify(melanoma_list, ground_list, feature, classifier)
 

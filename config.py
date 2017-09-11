@@ -13,8 +13,8 @@ ground_extension  = "png"
 """
 Parameters for the data set
 """
-nImage = 20  # Number of images to work (1000)
-nSample = 2    # Number of samples per each image (40)
+nImage = 1000  # Number of images to work (1000)
+nSample = 40    # Number of samples per each image (40)
 block = 25       # Block dimension is 25x25
 nCells = 8     # Number of cells by each field of the training set
 
