@@ -33,7 +33,7 @@ Feature Extraction
 """
 feature = FeatureExtraction()
 
-X_train, y_train = feature.first_method(melanoma_train, ground_train)
+X_train, y_train = feature.second_method(melanoma_train, ground_train)
 
 """
 ------------------
@@ -57,10 +57,18 @@ Classify images
 ---------------
 ---------------
 """
-melanoma_list = melanoma_test[0:2]
-ground_list = ground_test[0:2]
+melanoma_list = melanoma_test[2:8]
+ground_list = ground_test[2:8]
 
 seg = classify(melanoma_list, ground_list, feature, classifier)
+
+files = [f.split('.')[0]+'_classified.png' for f in melanoma_list]
+
+from skimage import io
+
+for s, f in zip(seg, files):
+    io.imsave('image/Classified/'+f, s/255)
+
 
 """
 ---------------

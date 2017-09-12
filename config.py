@@ -3,17 +3,17 @@ Paths and extension for images
 ------------------------------
 """
 
-melanoma_path = 'image/ISIC-2017_Training_Data/'
+melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_extension = 'jpg'
 
-ground_path = 'image/ISIC-2017_Training_Part1_GroundTruth/'
+ground_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
 ground_extension  = "png"
 
 
 """
 Parameters for the data set
 """
-nImage = 1000  # Number of images to work (1000)
+nImage = 505  # Number of images to work (1000)
 nSample = 40    # Number of samples per each image (40)
 block = 25       # Block dimension is 25x25
 nCells = 8     # Number of cells by each field of the training set
@@ -30,7 +30,7 @@ gabor_params = [frequency, theta]
 fmax = 1/2
 v = 2
 b = 1.177
-ns = 2
+ns = 1
 nd = 4
 
 """
