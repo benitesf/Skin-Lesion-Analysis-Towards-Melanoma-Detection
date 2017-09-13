@@ -2,6 +2,7 @@ import numpy as np
 import random as rnd
 from scipy.misc import imread
 from skimage.transform import resize
+from sklearn import preprocessing
 
 
 """
@@ -26,6 +27,7 @@ class Image:
             For block size 3, its consider a 3x3 sample block.
         """
         try:
+            mms = preprocessing.MinMaxScaler()
             self.melanoma = imread(melanoma)
             self.portion = int((block-1)/2)
             if ground is not None:

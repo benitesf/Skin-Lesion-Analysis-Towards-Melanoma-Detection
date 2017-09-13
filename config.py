@@ -40,7 +40,7 @@ Parameters for the neural network
 solver lbfgs works better for small datasets.
 solver adam works better for big datasets
 """
-learningParams = {'hidden_layer_size': (15, ), 'activation': 'logistic', 'solver': 'adam', 'alpha': 1e-5,
+learningParams = {'hidden_layer_size': (15, ), 'activation': 'logistic', 'solver': 'lbfgs', 'alpha': 1e-5,
                   'max_iter': 300,'random_state': 1, 'shuffle': True, 'verbose': True}
 
 ##  params = {'hidden_layer_size': , 'activation': , 'solver': , 'alpha': , 'batch_size': , 'learning_rate': ,\

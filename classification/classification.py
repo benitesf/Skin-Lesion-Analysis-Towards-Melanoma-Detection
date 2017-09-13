@@ -1,4 +1,6 @@
 from util.image import Image
+from scipy.misc import imread
+from sklearn import preprocessing
 import numpy as np
 import config as cfg
 
@@ -27,6 +29,7 @@ def classify(melanoma, ground, feature, classifier, block=True):
 
     return seg
 
+
 def per_block(img, img_seg, row, col, feature, classifier):
     ratio = 4
     adv = 2 * ratio + 1
@@ -47,6 +50,52 @@ def per_pixel(img, img_seg, row, col, feature, classifier):
             val = feature.features(blk)
             pre = classifier.predict([val])
             img_seg[r, c] = pre
+    return img_seg
+
+
+def accuracy(seg, ground_list):
+    """
+    Calculates the accuracy segmentation.
+
+    Parameters
+    ----------
+    seg: list
+        A list with the segmented images. Each item of the list is a 2D-array
+    ground_list: list
+        A list with all the ground_truth path of the segmented images.
+
+    Returns
+    -------
+    A list of 1D-array. Each sublist contents the values VP, FP, FN, VN of a confusion matrix.
+    """
+    from skimage import io
+
+    acc = []
+    mms = preprocessing.MinMaxScaler()
+
+    for s, g in zip(seg, ground_list):
+        ground = imread(cfg.ground_path + g)
+
+        m1 = ground.astype(int)
+        m2 = s.astype(int)
+
+        roc = np.zeros((4,), dtype=int) # VP, FP, FN, VN
+        for row in range(m1.shape[0]):
+            for col in range(m1.shape[1]):
+                val1 = m1[row][col]
+                val2 = m2[row][col]
+
+                if val1 == val2:
+                    if val1 == 255:
+                        roc[0] += 1
+                    elif val1 == 0:
+                        roc[3] += 1
+                elif val1 > val2:
+                    roc[2] += 1
+                else:
+                    roc[1] += 1
+        acc.append(roc)
+    return acc
 
 """
 # Calculate the accuracy and save the segmentation image
@@ -199,25 +248,7 @@ def classify_advanced(self, data, block=None):
         return image_classified
 
 # m1 es la imagen original, y m2 es la segmentada
-def compare_ground_truth(self, m1, m2):
-    m1 = m1.astype(int)
-    m2 = m2.astype(int)
-    roc = np.zeros((4,)) # VP, FP, FN, VN
-    for row in range(m1.shape[0]):
-        for col in range(m1.shape[1]):
-            val1 = m1[row][col]
-            val2 = m2[row][col]
 
-            if (val1 == val2):
-                if (val1 == 1):
-                    roc[0] += 1
-                elif (val1 == 0):
-                    roc[3] += 1
-            elif (val1 > val2):
-                roc[2] += 1
-            else:
-                roc[1] += 1
-    return roc
 
 # Print accurate
 def save_accurate(self, data, c):
