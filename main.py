@@ -24,8 +24,7 @@ Get train and test set
 all_melanoma = sorted(dh.get_file_name_dir(cfg.melanoma_path, cfg.melanoma_extension))
 all_ground = sorted(dh.get_file_name_dir(cfg.ground_path, cfg.ground_extension))
 
-melanoma_train, melanoma_test, ground_train, ground_test = train_test_split(all_melanoma, all_ground, test_size=0.33,
-                                                                            random_state=20)
+melanoma_train, melanoma_test, ground_train, ground_test = train_test_split(all_melanoma, all_ground, test_size=0.33, random_state=30)
 
 """
 ----------------------
@@ -77,7 +76,7 @@ for s, f in zip(seg, files):
 with open('image/Accuracy/000004.txt', 'w') as output:
     output.write('adam, second_method, classification per block\n\n')
     output.write(classifier.__str__()+'\n\n')
-    output.write(classifier.loss_+'\n\n')
+    output.write(str(classifier.loss_)+'\n\n')
     output.write('VP\tFP\tFN\tVN\n')
     for a, g in zip(acc, ground_list):
         output.write(str(a)+'\t'+g+'\n')
