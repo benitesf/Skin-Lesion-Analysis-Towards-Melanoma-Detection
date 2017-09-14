@@ -1,6 +1,5 @@
 from util.image import Image
 from scipy.misc import imread
-from sklearn import preprocessing
 import numpy as np
 import config as cfg
 
@@ -71,7 +70,6 @@ def accuracy(seg, ground_list):
     from skimage import io
 
     acc = []
-    mms = preprocessing.MinMaxScaler()
 
     for s, g in zip(seg, ground_list):
         ground = imread(cfg.ground_path + g)
