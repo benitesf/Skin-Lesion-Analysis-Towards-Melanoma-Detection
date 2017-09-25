@@ -1,44 +1,41 @@
-from scipy.misc import imread
-from skimage.restoration import denoise_bilateral
-from skimage.transform import estimate_transform
-from skimage import exposure
-
-import matplotlib.pyplot as plt
+from scipy.ndimage.filters import median_filter
+from math import floor, sqrt
 import numpy as np
 
-import sys, os
-sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection")
 
-melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
-melanoma_extension = 'jpg'
+def median_filter_(img):
+    M, N = img.shape[0:2]
+    n = floor(5 * sqrt((M/768) * (N/512)))
+    filtered = np.zeros(img.shape, dtype='uint8')
 
-img = imread(melanoma_path + 'ISIC_0000155.jpg')
+    filtered[:,:,0] = median_filter(img[:,:,0], size=n)
+    filtered[:,:,1] = median_filter(img[:,:,1], size=n)
+    filtered[:,:,2] = median_filter(img[:,:,2], size=n)
+
+    return filtered
+
 
 """
-Gamma correction
-----------------
+def plot_img_and_hist(img, axes, bins=256):
+    img = img_as_float(img)
+    ax_img, ax_hist = axes
+    ax_cdf = ax_hist.twinx()
+
+    # Display image
+    ax_img.imshow(img, cmap=plt.cm.gray)
+    ax_img.set_axis_off()
+
+    # Display histogram
+    ax_hist.hist(img.ravel(), bins=bins, histtype='step', color='black')
+    ax_hist.ticklabel_format(axis='y', style='scientific', scilimits=(0, 0))
+    ax_hist.set_xlabel('Pixel intensity')
+    ax_hist.set_xlim(0, 1)
+    ax_hist.set_yticks([])
+
+    # Display cumulative distribution
+    img_cdf, bins = exposure.cumulative_distribution(img, bins)
+    ax_cdf.plot(bins, img_cdf, 'r')
+    ax_cdf.set_yticks([])
+
+    return ax_img, ax_hist, ax_cdf
 """
-
-img_gamma_0 = exposure.adjust_gamma(img, gamma=0.9)
-img_gamma_1 = exposure.adjust_gamma(img, gamma=1.5)
-
-img_t = estimate_transform()
-
-fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(4,6))
-
-fig.suptitle('Gamma adjust', fontsize=10)
-
-ax = axes[0]
-ax.imshow(img)
-ax.axis('off')
-
-ax = axes[1]
-ax.imshow(img_bilateral0)
-ax.axis('off')
-
-ax = axes[2]
-ax.imshow(img_bilateral1)
-ax.axis('off')
-
-plt.show()
