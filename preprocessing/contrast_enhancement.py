@@ -1,6 +1,7 @@
 from scipy.misc import imread
 from skimage.restoration import denoise_bilateral
 from skimage.transform import estimate_transform
+from skimage import exposure
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -14,8 +15,13 @@ melanoma_extension = 'jpg'
 
 img = imread(melanoma_path + 'ISIC_0000155.jpg')
 
-#img_gamma_0 = exposure.adjust_gamma(img, gamma=0.9)
-#img_gamma_1 = exposure.adjust_gamma(img, gamma=1.5)
+"""
+Gamma correction
+----------------
+"""
+
+img_gamma_0 = exposure.adjust_gamma(img, gamma=0.9)
+img_gamma_1 = exposure.adjust_gamma(img, gamma=1.5)
 
 img_t = estimate_transform()
 
