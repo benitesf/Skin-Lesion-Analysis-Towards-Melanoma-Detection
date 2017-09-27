@@ -7,7 +7,7 @@ def shades_of_gray_method(image):
 
     #gamma = random.gauss(1, 0.1)
     img = exposure.adjust_gamma(image, gamma=2.2)
-    img = image
+
     """
     Illuminant estimated using Minkowski norm
     -----------------------------------------

@@ -3,8 +3,8 @@ from scipy.misc import imread, imsave
 from skimage import exposure, img_as_float
 import sys, os
 
-sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
 
 import util.dirhandler
 from contrast_enhancement import median_filter_
@@ -29,4 +29,4 @@ Iterate over the list of images
 for img_name in all_melanoma:
     img = img_as_float(median_filter_(imread(melanoma_path + img_name)))
     img = shades_of_gray_method(img)
-    imsave('image/Data_Preprocessed/'+img_name, img)
+    imsave('image/Data_Preprocessed_Gamma/'+img_name, img)
