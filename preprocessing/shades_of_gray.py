@@ -1,11 +1,11 @@
-from skimage import exposure
+from skimage import exposure, img_as_float
 import numpy as np
 import random
 
 
 def shades_of_gray_method(image):
 
-    #gamma = random.gauss(1, 0.1)
+    image = img_as_float(image)
     img = exposure.adjust_gamma(image, gamma=2.2)
 
     """
