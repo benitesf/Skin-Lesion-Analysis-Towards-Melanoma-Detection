@@ -14,11 +14,11 @@ from preprocessing.shades_of_gray import shades_of_gray_method
 Get name images to preprocessing
 --------------------------------
 """
-
 melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_extension = 'jpg'
 
 all_melanoma = sorted(util.dirhandler.get_file_name_dir(melanoma_path, melanoma_extension))
+
 
 """
 Iterate over the list of images
@@ -37,4 +37,4 @@ for img_name in all_melanoma:
 
     # Color augmentation
     image = shades_of_gray_method(image)
-    imsave('image/Data_Preprocessed_Gamma/'+img_name, image)
+    imsave('image/Preprocessed_Data/'+img_name, image)
