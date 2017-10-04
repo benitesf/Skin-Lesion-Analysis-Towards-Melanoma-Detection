@@ -1,5 +1,7 @@
 import numpy as np
-from skimage.color import rgb2gray
+from skimage.color import rgb2gray, rgb2hsv, rgb2lab, rgb2luv
+from scipy.stats import skew
+from preprocessing.shadding_attenuation import entropy_ratio
 import time
 
 
@@ -26,25 +28,86 @@ def features(img, kernels):
 
 
 def values(blk, kernels):
-    rgb = mean_rgb(blk)
+    rgb = rgb_features(blk) # 15
+    hsv = hsv_features(blk) # 15
+    lab = lab_features(blk) # 15
+    luv = luv_features(blk) # 15
     # start_time = time.time()
-    gab = gabor_filter(blk, kernels)
+    gab = gabor_filter(blk, kernels) # the number of features depends on config parameters (4, 8, ...)
     # print("--- %s seconds ---" % (time.time() - start_time))
-    return [*rgb, *gab]
+    return [*rgb, *hsv, *lab, *luv, *gab] # 60 + ngabor
 
 
-def mean_rgb(block):
+def rgb_features(block):
+    return [*mean(block), *std_dev(block), *skew_(block), *energy(block), *entropy_ratio(block)]
+
+
+def hsv_features(block):
+    blk = rgb2hsv(block)
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_ratio(blk)]
+
+
+def lab_features(block):
+    blk = rgb2lab(block)
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_ratio(blk)]
+
+
+def luv_features(block):
+    blk = rgb2luv(block)
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_ratio(blk)]
+
+
+def mean(block):
     """
-    Function to calculate a mean rgb from a block of image
+    Function to calculate the mean of the block
 
     Returns
     -------
         A 1D array with 3 fields
     """
-    r = np.mean(block[:, :, 0])
-    g = np.mean(block[:, :, 1])
-    b = np.mean(block[:, :, 2])
-    return [r, g, b]
+    a = np.mean(block[:, :, 0])
+    b = np.mean(block[:, :, 1])
+    c = np.mean(block[:, :, 2])
+    return [a, b, c]
+
+
+def std_dev(block):
+    """
+    Function to calculate the standard deviation of the block
+
+    Returns
+    -------
+        A 1D array with 3 fields
+    """
+    a = np.std(block[:, :, 0])
+    b = np.std(block[:, :, 1])
+    c = np.std(block[:, :, 2])
+    return [a, b ,c]
+
+
+def skew_(block):
+    """
+    Function to calculate the skewness of the block
+
+    """
+    a = skew(block[:, :, 0].flatten())
+    b = skew(block[:, :, 1].flatten())
+    c = skew(block[:, :, 2].flatten())
+    return [a, b, c]
+
+
+def energy(block):
+    a = np.sqrt((block[:, :, 0] ** 2).sum())
+    b = np.sqrt((block[:, :, 1] ** 2).sum())
+    c = np.sqrt((block[:, :, 2] ** 2).sum())
+    return [a, b, c]
+
+
+def entropy(block):
+    a = entropy_ratio(block[:, :, 0])
+    b = entropy_ratio(block[:, :, 1])
+    c = entropy_ratio(block[:, :, 2])
+    return [a, b, c]
 
 
 def gabor_filter(block, kernels):
