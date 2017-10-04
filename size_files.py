@@ -11,13 +11,16 @@ all_melanoma = sorted(util.dirhandler.get_file_name_dir(melanoma_path, melanoma_
 
 info_sizes = [os.stat(melanoma_path+i).st_size/(2**20) for i in all_melanoma]
 
-max_size = all_melanoma[info_sizes.index(max(info_sizes))]
+for size, namef in zip (info_sizes, all_melanoma):
+    if size > 2: # Mayor a 2MB
+        print('Resizing '+namef)
+        print('size: '+str(size)+'\n')
+        img = imread(melanoma_path + namef)
+        shape = np.array(img.shape[0:2])
+        new_shape = np.floor(shape - (shape * 0.20)).astype(int)
 
-img = imread(melanoma_path+max_size)
+        img = resize(img, new_shape, mode='reflect')
+        imsave('image/ISIC-2017_Training_Data_Clean/' + namef, img)
 
-shape = np.array(img.shape[0:2])
-new_shape = np.floor(shape - (shape*0.15)).astype(int)
 
-r = resize(img, new_shape, mode='reflect')
-imsave('image/'+max_size, r)
 

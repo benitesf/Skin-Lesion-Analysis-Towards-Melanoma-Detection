@@ -104,8 +104,7 @@ def shading_attenuation_method(image, extract, margin):
     # Select the image which have least entropy
     values = [V, Vnewc2, Vnewf2, Vnewc3, Vnewf3]
     entropy = [shatt.entropy_ratio(v) for v in values]
-    print(entropy)
-    print("-----------------")
+    print('\tentropy: '+str(entropy))
     index = entropy.index(min(entropy))
 
     hsv[:, :, 2] = np.copy(values[index])
