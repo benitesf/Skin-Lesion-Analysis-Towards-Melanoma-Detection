@@ -12,6 +12,8 @@ def classify(melanoma, ground, feature, classifier, block=True):
     seg = []
 
     for (melanoma_item, ground_item) in zip(melanoma, ground):
+        print('Segmentating...')
+        print('\t'+melanoma_item)
         img = Image(cfg.melanoma_path + melanoma_item, cfg.ground_path + ground_item, cfg.block)
         size = img.get_shape()
         portion = img.get_portion()
