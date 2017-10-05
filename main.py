@@ -5,7 +5,7 @@ from features_extraction.feature_extraction import FeatureExtraction
 from learning.learning import neural_network
 
 # Import methods of classification
-from classification.classification import classify, accuracy
+from classification.classification import classify, confusion_matrix, estimate_error
 
 #
 from skimage import io
@@ -64,21 +64,22 @@ ground_list = ground_test[0:10]
 
 seg = classify(melanoma_list, ground_list, feature, classifier)
 
-acc = accuracy(seg, ground_list)
+confmat = confusion_matrix(seg, ground_list)
+sensitivity, specificity, accuracy, roc = estimate_error(confmat)
 
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)
-    img.convert('L').save('image/Classified/000004/'+f)
+    img.convert('L').save('image/Classified/Segmentation_Preprocessed_Gamma_Data/000014/'+f)
     #io.imsave('image/Classified/'+f, img)
 
-with open('image/Accuracy/000004.txt', 'w') as output:
-    output.write('adam, second_method, classification per block\n\n')
+with open('image/Accuracy/Test_Preprocessed_Gamma_Data/000014.txt', 'w') as output:
+    output.write('adam, second_method 8 gabor filters, classification per block\n\n')
     output.write(classifier.__str__()+'\n\n')
     output.write(str(classifier.loss_)+'\n\n')
     output.write('VP\tFP\tFN\tVN\n')
-    for a, g in zip(acc, ground_list):
+    for a, g in zip(confmat, ground_list):
         output.write(str(a)+'\t'+g+'\n')
 
 """

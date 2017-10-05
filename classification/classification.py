@@ -52,9 +52,35 @@ def per_pixel(img, img_seg, row, col, feature, classifier):
     return img_seg
 
 
-def accuracy(seg, ground_list):
+def estimate_error(confmat):
     """
-    Calculates the accuracy segmentation.
+    Calculates the accuracy from a confusion matrix.
+
+    Parameters
+    ----------
+    confmat: list of lists
+        The confusion matrix to calculate the accuracy
+
+    Returns
+    -------
+        4 values, (Sensitivity, Specificity, Accuracy, AUC)
+    """
+    cm = np.array(confmat)
+    TP = cm[:, 0].sum()
+    FP = cm[:, 1].sum()
+    FN = cm[:, 2].sum()
+    TN = cm[:, 3].sum()
+    sensitivity = TP / (TP + FN)
+    specificity = TN / (TN + FP)
+    accuracy = (TP + TN) / (TP + FP + TN + FN)
+    roc = None
+
+    return sensitivity, specificity, accuracy, roc
+
+
+def confusion_matrix(seg, ground_list):
+    """
+    Calculates the confusion matrix
 
     Parameters
     ----------
@@ -65,7 +91,7 @@ def accuracy(seg, ground_list):
 
     Returns
     -------
-    A list of 1D-array. Each sublist contents the values VP, FP, FN, VN of a confusion matrix.
+    A list of 1D-array. Each sublist contents the values TP, FP, FN, TN of a confusion matrix.
     """
     from skimage import io
 
@@ -77,7 +103,7 @@ def accuracy(seg, ground_list):
         m1 = ground.astype(int)
         m2 = s.astype(int)
 
-        roc = np.zeros((4,), dtype=int) # VP, FP, FN, VN
+        roc = np.zeros((4,), dtype=int) # TP, FP, FN, TN
         for row in range(m1.shape[0]):
             for col in range(m1.shape[1]):
                 val1 = m1[row][col]
