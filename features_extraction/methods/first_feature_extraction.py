@@ -27,6 +27,20 @@ def features(img, kernels):
 
 
 def values(blk, kernels):
+    """
+    Extract features of a block 3D array
+
+    Parameters
+    ----------
+    blk: 3D array
+        The block to extract the features
+    kernels: list
+        The list of gabor kernels to apply to the block
+
+    Returns
+    -------
+        A list of features which has been extracted from the block
+    """
     rgb = rgb_features(blk) # 15
     hsv = hsv_features(blk) # 15
     lab = lab_features(blk) # 15

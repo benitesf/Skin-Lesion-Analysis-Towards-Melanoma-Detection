@@ -7,26 +7,6 @@ from sklearn import preprocessing
 from gabor_filter_banks import gabor_bank
 
 
-sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection")
-
-path = 'image/image_for_test/'
-
-melanoma = {'00': ('ISIC_0000047.jpg', 'ISIC_0000047_recorte.jpg'),
-            '01': ('ISIC_0000049.jpg', 'ISIC_0000049_recorte.jpg'),
-            '02': ('ISIC_0000055.jpg', 'ISIC_0000055_recorte.jpg'),
-            '03': ('ISIC_0000066.jpg', 'ISIC_0000066_recorte.jpg'),
-            '04': ('ISIC_0000077.jpg', 'ISIC_0000077_recorte.jpg')}
-
-dactilar = {'original': 'dactilar.png',
-            'recorte0': 'dactilar_recorte_0.png',
-            'recorte45': 'dactilar_recorte_45.png',
-            'recorte90': 'dactilar_recorte_90.png',
-            'recorte180': 'dactilar_recorte_180.png'}
-
-bandas = 'bandas.png'
-
-
 def plot_surface2d(Z):
     plt.imshow(Z, cmap='Greys')
     #plt.imshow(Z)
@@ -57,13 +37,21 @@ de Fourier para su estudio.
 
 Este análisis servirá para definir con mayor exactidud la frecuencia del banco de filtros de Gabor.
 """
-"""from scipy.misc import imread
+from scipy.misc import imread
 from scipy import fftpack
+import sys, os
 
-img = imread(path + melanoma['00'][0], mode='F')
-ground = imread(path + 'ISIC_0000047_segmentation.png', mode='F')
+sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+
+melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
+ground_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
+
+
+image = imread(melanoma_path + 'ISIC_0000013.jpg', mode='F')
+ground = imread(ground_path + 'ISIC_0000013_segmentation.png', mode='F')
 ground /= 255
-lesion = img*ground
+lesion = image*ground
 
 F1 = fftpack.fft2(lesion)
 # Now shift so that low spatial frequencies are in the center.
@@ -71,8 +59,10 @@ F2 = fftpack.fftshift(F1)
 # the 2D power spectrum is:
 psd2D = np.abs(F2)
 mms = preprocessing.MinMaxScaler()
-filtered = mms.fit_transform(psd2D)"""
-
+filtered = mms.fit_transform(psd2D)
+filtered[filtered>0.5] = 1
+io.imshow(filtered, cmap='gray')
+io.show()
 """
 ----------------------------------------------
 """
@@ -104,7 +94,7 @@ Referencia
 https://www.researchgate.net/publication/4214734_Gabor_feature_extraction_for_character_recognition_Comparison_with_gradient_feature
 """
 
-
+"""
 fmax = 1/2
 ns = 4
 nd = 4
@@ -122,7 +112,7 @@ for gabor in gabor_filter_bank:
     filtered.append(gabor.magnitude(img_gray))
 
 plot_image_convolved(filtered, ns, nd)
-
+"""
 """
 --------------------------------
 """

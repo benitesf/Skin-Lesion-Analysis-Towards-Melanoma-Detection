@@ -2,6 +2,7 @@ from util.image import Image
 from scipy.misc import imread
 import numpy as np
 import config as cfg
+import time
 
 """
 Implements methods to classify images
@@ -10,6 +11,7 @@ Implements methods to classify images
 
 def classify(melanoma, ground, feature, classifier, block=True):
     seg = []
+    tim = []
 
     for (melanoma_item, ground_item) in zip(melanoma, ground):
         print('Segmentating...')
@@ -24,11 +26,15 @@ def classify(melanoma, ground, feature, classifier, block=True):
         col = [portion, size[1] - portion]
 
         if block:
+            st = time.time()
             seg.append(per_block(img, img_seg, row, col, feature, classifier))
+            tim.append(time.time() - st)
         else:
+            st = time.time()
             seg.append(per_pixel(img, img_seg, row, col, feature, classifier))
+            tim.append(time.time() - st)
 
-    return seg
+    return seg, tim
 
 
 def per_block(img, img_seg, row, col, feature, classifier):
@@ -54,6 +60,58 @@ def per_pixel(img, img_seg, row, col, feature, classifier):
     return img_seg
 
 
+def local_error(confmat):
+    """
+    Calculates the accuracy per image
+
+    Parameters
+    ----------
+    confmat: list of lists
+        The confusion matrix to calculate the accuracy, TP, FP, FN, TN
+
+    Returns
+    -------
+        A list of list with 3 values (Sensitivity, Specificity, Accuracy)
+    """
+    local_err = []
+    for mat in confmat:
+        TP = mat[0]
+        FP = mat[1]
+        FN = mat[2]
+        TN = mat[3]
+        sensitivity = TP / (TP + FN)
+        specificity = TN / (TN + FP)
+        accuracy = (TP + TN) / (TP + FP + TN + FN)
+        local_err.append([sensitivity, specificity, accuracy])
+    return local_err
+
+
+def total_error(local_acc):
+    """
+    Calculates the mean accuracy of a list of local accuracys
+
+    Parameters
+    ----------
+    local_acc: list of lists
+        The local accuracy of each image
+
+    Returns
+    -------
+        3 values, (Sensitivity, Specificity, Accuracy)
+    """
+    acc = np.array(local_acc)
+    sensitivity_mean = acc[:, 0].mean()
+    sensitivity_std = acc[:, 0].std()
+
+    specificity_mean = acc[:, 1].mean()
+    specificity_std = acc[:, 1].std()
+
+    accuracy_mean = acc[:, 2].mean()
+    accuracy_std = acc[:, 2].std()
+
+    return [sensitivity_mean, sensitivity_std], [specificity_mean, specificity_std], [accuracy_mean, accuracy_std]
+
+
 def estimate_error(confmat):
     """
     Calculates the accuracy from a confusion matrix.
@@ -65,7 +123,7 @@ def estimate_error(confmat):
 
     Returns
     -------
-        4 values, (Sensitivity, Specificity, Accuracy, AUC)
+        3 values, (Sensitivity, Specificity, Accuracy)
     """
     cm = np.array(confmat)
     TP = cm[:, 0].sum()
@@ -75,9 +133,8 @@ def estimate_error(confmat):
     sensitivity = TP / (TP + FN)
     specificity = TN / (TN + FP)
     accuracy = (TP + TN) / (TP + FP + TN + FN)
-    roc = None
 
-    return sensitivity, specificity, accuracy, roc
+    return sensitivity, specificity, accuracy
 
 
 def confusion_matrix(seg, ground_list):

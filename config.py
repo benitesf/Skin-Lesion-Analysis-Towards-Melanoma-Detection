@@ -3,7 +3,7 @@ Paths and extension for images
 ------------------------------
 """
 
-melanoma_path = 'image/ISIC-2017_Training_Data_Clean_Preprocessed/'
+melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_extension = 'jpg'
 
 ground_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
@@ -22,7 +22,7 @@ nCells = 65     # Number of cells by each field of the training set
 Parameters for gabor kernels
 """
 # First method
-frequency = [0.6, 0.7]
+frequency = [0.5, 0.9]
 theta = [0, 45]
 gabor_params = [frequency, theta]
 
@@ -40,7 +40,7 @@ Parameters for the neural network
 solver lbfgs works better for small datasets.
 solver adam works better for big datasets
 """
-learningParams = {'hidden_layer_size': (15, ), 'activation': 'logistic', 'solver': 'lbfgs', 'alpha': 1e-5,
+learningParams = {'hidden_layer_sizes': (128, ), 'activation': 'logistic', 'solver': 'lbfgs', 'alpha': 1e-5,
                   'max_iter': 300,'random_state': 1, 'shuffle': True, 'verbose': True}
 
 ##  params = {'hidden_layer_size': , 'activation': , 'solver': , 'alpha': , 'batch_size': , 'learning_rate': ,\
