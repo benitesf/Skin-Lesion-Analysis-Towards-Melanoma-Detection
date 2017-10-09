@@ -1,5 +1,6 @@
 # Some scripts like test.py and others
 image/
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
