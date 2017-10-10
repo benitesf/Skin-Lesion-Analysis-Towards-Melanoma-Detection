@@ -69,8 +69,8 @@ score_train = classifier.score(X_train, y_train)
 Classify images
 ---------------
 """
-melanoma_list = melanoma_test
-ground_list = ground_test
+melanoma_list = melanoma_test[0:12]
+ground_list = ground_test[0:12]
 
 seg, tim = classify(melanoma_list, ground_list, feature, classifier)
 

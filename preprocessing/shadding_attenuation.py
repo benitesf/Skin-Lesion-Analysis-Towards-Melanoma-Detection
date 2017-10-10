@@ -141,6 +141,8 @@ def entropy_ratio(src):
 def in_range(X):
     min = X.min()
     max = X.max()
+    if (max - min) == 0:
+        return np.ones(X.shape)
     return (X - min) / (max - min)
 
 
