@@ -16,6 +16,7 @@ from sklearn.model_selection import train_test_split
 import util.dirhandler as dh
 import config as cfg
 import numpy as np
+import time
 import sys
 
 """
@@ -40,7 +41,9 @@ Feature Extraction
 """
 feature = FeatureExtraction()
 
+start_t = time.time()
 X, y = feature.first_method(melanoma_train, ground_train)
+feature_t = (time.time() - start_t)/60
 
 """
 ------------------
@@ -55,7 +58,9 @@ Training Neural Network
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.166)
 
 classifier = neural_network()
+start_t = time.time()
 classifier.fit(X_train, y_train)
+classifier_t = (time.time() - start_t)/60
 
 score_test = classifier.score(X_test, y_test)
 score_train = classifier.score(X_train, y_train)
@@ -69,8 +74,8 @@ score_train = classifier.score(X_train, y_train)
 Classify images
 ---------------
 """
-melanoma_list = melanoma_test[0:12]
-ground_list = ground_test[0:12]
+melanoma_list = melanoma_test
+ground_list = ground_test
 
 seg, tim = classify(melanoma_list, ground_list, feature, classifier)
 
@@ -87,7 +92,7 @@ confmat = confusion_matrix(seg, ground_list)
 local_err = local_error(confmat)
 sensitivity, specificity, accuracy = total_error(local_err)
 
-tim = np.array(tim)/120
+tim = np.array(tim)/60
 total_time = tim.sum()
 mean_time = tim.mean()
 std_time = tim.std()
@@ -123,7 +128,12 @@ with open(path_save + 'Measures.txt', 'w') as output:
     output.write(classifier.__str__()+'\n\n')
     output.write('Final function value :' + str(classifier.loss_)+'\n\n')
     output.write('-------------------------------------------------------------------------\n')
-    output.write('Tiempos de ejecución:\n')
+    output.write('Time of execution:\n')
+    output.write('Feature Extraction:\n')
+    output.write('\tTime: ' + str(feature_t) + '\n')
+    output.write('Neural Network Training:\n')
+    output.write('\tTime: ' + str(classifier_t) + '\n')
+    output.write('Segmentation:\n')
     output.write('\tTotal: ' + str(total_time) + '\n')
     output.write('\tMean: ' + str(mean_time) + '+-' + str(std_time) + '\n')
     output.write('-------------------------------------------------------------------------\n\n')
