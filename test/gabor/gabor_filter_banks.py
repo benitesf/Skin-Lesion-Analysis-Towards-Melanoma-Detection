@@ -92,7 +92,6 @@ def gabor_bank(fmax, ns, nd, v=2, b=1.177):
     """
     # Frequency
     f = fmax * (v + 1) / (2 * v)
-
     sigma_u = f * (v - 1) / (b * (v + 1))
     sigma_v = sigma_u / alpha
     sigma_x = 1 / (2 * np.pi * sigma_u)

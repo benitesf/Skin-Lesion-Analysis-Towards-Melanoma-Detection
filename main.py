@@ -107,7 +107,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'image/First_Test/Normal_Data/'
+path_save = 'image/First_Test/Normal_Data/Train'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)
@@ -122,14 +122,14 @@ with open(path_save + 'Measures.txt', 'w') as output:
     output.write('Number of fields: ' + str(cfg.nCells) + '\n')
     output.write('Number of images to train: ' + str(len(melanoma_train)) + '\n')
     output.write('Number of image to test: ' + str(len(melanoma_test)) + '\n')
-    output.write('Size of Train from Train_Images : ' + str(X_train.shape) + '\n')
-    output.write('Size of Test from Train_Images:' + str(X_test.shape) + '\n')
+    output.write('Size of Train from Train_Images: ' + str(X_train.shape) + '\n')
+    output.write('Size of Test from Train_Images: ' + str(X_test.shape) + '\n')
     output.write('Type of segmentation: block\n\n')
     output.write(classifier.__str__()+'\n\n')
-    output.write('Final function value :' + str(classifier.loss_)+'\n\n')
+    output.write('Final function value: ' + str(classifier.loss_)+'\n\n')
     output.write('-------------------------------------------------------------------------\n')
-    output.write('Time of execution:\n')
-    output.write('Feature Extraction:\n')
+    output.write('Time of execution: \n')
+    output.write('Feature Extraction: \n')
     output.write('\tTime: ' + str(feature_t) + '\n')
     output.write('Neural Network Training:\n')
     output.write('\tTime: ' + str(classifier_t) + '\n')

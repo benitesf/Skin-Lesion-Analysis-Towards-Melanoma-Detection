@@ -100,7 +100,7 @@ def fourier(kernel):
 Genera el banco de filtros y su plotting
 ----------------------------------------
 """
-fmax = 1/2
+fmax = 0.5
 ns = 4
 nd = 4
 v = 2
@@ -127,7 +127,7 @@ kernels_real = []
 for kernel in kernels:
     kernels_real.append(kernel.real)
 
-#plot_gabor_fourier_2d(kernels_real, fouriers, ns, nd*2)
+plot_gabor_fourier_2d(kernels_real, fouriers, ns, nd*2)
 
 """
 ----------------------------------------

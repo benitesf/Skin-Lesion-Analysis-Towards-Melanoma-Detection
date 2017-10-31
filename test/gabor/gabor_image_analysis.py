@@ -69,55 +69,6 @@ io.show()
 
 
 """
-Genera banco de filtros de gabor
---------------------------------
-
-Definimos los parámetros iniciales que vamos a utilizar para la generación del banco de filtros de Gabor.
-A partir de una frecuencia máxima (fmax), un scaling factor (v) y valor de corte de amplitud (b) se van a generar
-automáticamente los filtros de Gabor.
-
-Parámetros
-----------
-fmax: float
-    Frecuencia máxima para definir los filtros de Gabor.
-ns: scalar
-    Número de escalas de kernels que se van a generar.
-nd: scalar
-    Número de orientación de kernels que se van a generar.
-v: float
-    Scaling factor, para generar los subsiguientes kernels a partir del primero.
-b: float
-    Valor de corte de amplitud.
-
-Referencia
-----------
-https://www.researchgate.net/publication/4214734_Gabor_feature_extraction_for_character_recognition_Comparison_with_gradient_feature
-"""
-
-"""
-fmax = 1/2
-ns = 4
-nd = 4
-v = 2
-b = 1.177
-
-gabor_filter_bank = gabor_bank(fmax=fmax, ns=ns, nd=nd, v=v, b=b)
-
-img = io.imread(path + dactilar['original'])
-img_gray = rgb2gray(img)
-
-filtered = []
-
-for gabor in gabor_filter_bank:
-    filtered.append(gabor.magnitude(img_gray))
-
-plot_image_convolved(filtered, ns, nd)
-"""
-"""
---------------------------------
-"""
-
-"""
 Para mejor visualización
 ------------------------
 

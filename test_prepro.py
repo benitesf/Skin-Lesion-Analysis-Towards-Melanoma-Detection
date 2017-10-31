@@ -143,8 +143,7 @@ def retrieve_color(X, muorig):
 Fitting polynomial function
 ---------------------------
 """
-#melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
-melanoma_path = 'image/Data_Preprocessed_Gamma/'
+melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_extension = 'jpg'
 
 image = imread(melanoma_path + 'ISIC_0000386.jpg')
@@ -208,6 +207,26 @@ Vprocf2 = in_range(Vprocf2)
 Vprocc3 = in_range(Vprocc3)
 Vprocf3 = in_range(Vprocf3)
 
+# ****************************************
+# Images without retrieve color
+
+fhsvc2 = np.copy(hsv)
+fhsvf2 = np.copy(hsv)
+fhsvc3 = np.copy(hsv)
+fhsvf3 = np.copy(hsv)
+
+fhsvc2[:, :, 2] = np.copy(Vprocc2)
+fhsvf2[:, :, 2] = np.copy(Vprocf2)
+fhsvc3[:, :, 2] = np.copy(Vprocc3)
+fhsvf3[:, :, 2] = np.copy(Vprocf3)
+
+fattenuatedc2 = hsv2rgb(fhsvc2)
+fattenuatedf2 = hsv2rgb(fhsvf2)
+fattenuatedc3 = hsv2rgb(fhsvc3)
+fattenuatedf3 = hsv2rgb(fhsvf3)
+
+# ****************************************
+
 # Retrieve true color to skin
 muorig = V.mean()
 Vnewc2 = retrieve_color(Vprocc2, muorig)
@@ -236,12 +255,28 @@ attenuatedf2 = hsv2rgb(hsvf2)
 attenuatedc3 = hsv2rgb(hsvc3)
 attenuatedf3 = hsv2rgb(hsvf3)
 
-fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(6, 4))
+fig, axes = plt.subplots(nrows=2, ncols=5, figsize=(6, 4))
 
-ax = axes[0]
+ax = axes[0][0]
 ax.imshow(image)
 ax.axis('off')
+# ****************************
+ax = axes[0][1]
+ax.imshow(fattenuatedc2)
+ax.axis('off')
 
+ax = axes[0][2]
+ax.imshow(fattenuatedf2)
+ax.axis('off')
+
+ax = axes[0][3]
+ax.imshow(fattenuatedc3)
+ax.axis('off')
+
+ax = axes[0][4]
+ax.imshow(fattenuatedf3)
+ax.axis('off')
+# ****************************
 ax = axes[1]
 ax.imshow(attenuatedc2)
 ax.axis('off')
