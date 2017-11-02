@@ -1,7 +1,7 @@
 import numpy as np
 from skimage.color import rgb2gray, rgb2hsv, rgb2lab, rgb2luv
 from scipy.stats import skew
-from preprocessing.shadding_attenuation import entropy_ratio, in_range
+from sklearn.metrics.cluster import entropy
 import time
 
 
@@ -52,22 +52,22 @@ def values(blk, kernels):
 
 
 def rgb_features(block):
-    return [*mean(block), *std_dev(block), *skew_(block), *energy(block), *entropy(block)]
+    return [*mean(block), *std_dev(block), *skew_(block), *energy(block), *entropy_(block)]
 
 
 def hsv_features(block):
     blk = rgb2hsv(block)
-    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy(blk)]
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_(blk)]
 
 
 def lab_features(block):
     blk = rgb2lab(block)
-    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy(blk)]
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_(blk)]
 
 
 def luv_features(block):
     blk = rgb2luv(block)
-    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy(blk)]
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_(blk)]
 
 
 def mean(block):
@@ -116,11 +116,10 @@ def energy(block):
     return [a, b, c]
 
 
-def entropy(block):
-    blk = in_range(block)
-    a = entropy_ratio(blk[:, :, 0])
-    b = entropy_ratio(blk[:, :, 1])
-    c = entropy_ratio(blk[:, :, 2])
+def entropy_(block):
+    a = entropy(block[:, :, 0])
+    b = entropy(block[:, :, 1])
+    c = entropy(block[:, :, 2])
     return [a, b, c]
 
 

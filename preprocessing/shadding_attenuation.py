@@ -1,4 +1,4 @@
-from skimage.filters.rank import entropy
+from sklearn.metrics.cluster import entropy
 from skimage import img_as_ubyte
 from math import log2
 import numpy as np
@@ -127,16 +127,16 @@ def apply_cubic_function(V, coeff):
                        coeff[4] * (x ** 2) + coeff[5] * (y ** 2) + coeff[6] * x * y + coeff[7] * x + coeff[8] * y + coeff[9]
     return Vproc
 
-
+"""
 def entropy_ratio(src):
     img = img_as_ubyte(src)
-    den, bins = np.histogram(img, bins=range(255), density=True)
+    den, bins = np.histogram(img, bins=range(256), density=True)
     H = 0
     for i in range(den.shape[0]):
         if den[i] > 0:
             H += den[i]*log2(den[i])
-    return H*-1
-
+    return H*-1        
+"""
 
 def in_range(X):
     min = X.min()

@@ -2,6 +2,7 @@ from scipy.ndimage.filters import median_filter
 from preprocessing import shadding_attenuation as shatt
 from math import floor, sqrt
 from skimage.color import rgb2hsv, hsv2rgb
+from sklearn.metrics.cluster import entropy
 import numpy as np
 
 
@@ -103,9 +104,9 @@ def shading_attenuation_method(image, extract, margin):
 
     # Select the image which have least entropy
     values = [V, Vnewc2, Vnewf2, Vnewc3, Vnewf3]
-    entropy = [shatt.entropy_ratio(v) for v in values]
-    print('\tentropy: '+str(entropy))
-    index = entropy.index(min(entropy))
+    entropy_vals = [entropy(v) for v in values]
+    print('\tentropy: '+str(entropy_vals))
+    index = entropy_vals.index(min(entropy_vals))
 
     hsv[:, :, 2] = np.copy(values[index])
     attenuated = hsv2rgb(hsv)
