@@ -1,7 +1,7 @@
 # Import util methods
 from scipy.misc import imread, imsave
 import util.dirhandler
-from preprocessing.contrast_enhancement import median_filter_, shading_attenuation_method
+from preprocessing.illumination_enhancement import median_filter_, shading_attenuation_method
 from preprocessing.color_augmentation import shades_of_gray_method
 import os
 #import sys, os
