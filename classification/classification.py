@@ -162,7 +162,7 @@ def confusion_matrix(seg, ground_list):
         m1 = ground.astype(int)
         m2 = s.astype(int)
 
-        roc = np.zeros((4,), dtype=int) # TP, FP, FN, TN
+        conf = np.zeros((4,), dtype=int) # TP, FP, FN, TN
         for row in range(m1.shape[0]):
             for col in range(m1.shape[1]):
                 val1 = m1[row][col]
@@ -170,14 +170,14 @@ def confusion_matrix(seg, ground_list):
 
                 if val1 == val2:
                     if val1 == 255:
-                        roc[0] += 1
+                        conf[0] += 1
                     elif val1 == 0:
-                        roc[3] += 1
+                        conf[3] += 1
                 elif val1 > val2:
-                    roc[2] += 1
+                    conf[2] += 1
                 else:
-                    roc[1] += 1
-        acc.append(roc)
+                    conf[1] += 1
+        acc.append(conf)
     return acc
 
 """

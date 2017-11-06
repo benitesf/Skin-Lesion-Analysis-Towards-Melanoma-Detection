@@ -28,7 +28,7 @@ all_melanoma = sorted(dh.get_file_name_dir(cfg.melanoma_path, cfg.melanoma_exten
 all_ground = sorted(dh.get_file_name_dir(cfg.ground_path, cfg.ground_extension))
 
 melanoma_train, melanoma_test, ground_train, ground_test = train_test_split(all_melanoma, all_ground, test_size=0.25,
-                                                                            random_state=15)
+                                                                            random_state=25)
 
 
 """
@@ -74,8 +74,8 @@ score_train = classifier.score(X_train, y_train)
 Classify images
 ---------------
 """
-melanoma_list = melanoma_test
-ground_list = ground_test
+melanoma_list = [melanoma_test[0]]
+ground_list = [ground_test[0]]
 
 seg, tim = classify(melanoma_list, ground_list, feature, classifier)
 
@@ -107,7 +107,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'image/First_Test/Normal_Data/Train'
+path_save = 'resultados/first_test/'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)
@@ -146,7 +146,8 @@ with open(path_save + 'Measures.txt', 'w') as output:
     output.write('\tSpecificity: ' + str(specificity[0]) + '+-' + str(specificity[1]) + '\n')
     output.write('\tAccuracy: ' + str(accuracy[0]) + '+-' + str(accuracy[1]) + '\n')
     output.write('-------------------------------------------------------------------------\n\n')
-    output.write('\tTP\tFP\tFN\tTN\n')
+    output.write('Local error\n')
+    output.write('\t[TP\tFP\tFN\tTN]|[sensitivity, specificity, accuracy]\t\n')
     for a, g, l in zip(confmat, ground_list, local_err):
         output.write(str(a) + '\t' + g + '\t' + str(l) + '\n')
 
