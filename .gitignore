@@ -55,6 +55,8 @@ crashlytics-build.properties
 fabric.properties
 
 # Images
+image/
+memory/
 *.jpg
 *.png
 *.jpeg
