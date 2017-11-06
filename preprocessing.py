@@ -3,7 +3,7 @@ from scipy.misc import imread, imsave
 import util.dirhandler
 from preprocessing.smoothing import median_filter_
 from preprocessing.illumination_enhancement import shading_attenuation_method
-from preprocessing.color_augmentation import shades_of_gray_method
+from preprocessing.contrast_enhancement import shades_of_gray_method
 import os
 #import sys, os
 #sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
@@ -21,6 +21,7 @@ melanoma_extension = 'jpg'
 
 all_melanoma = sorted(util.dirhandler.get_file_name_dir(melanoma_path, melanoma_extension))
 
+all_melanoma = all_melanoma[10:20]
 
 """
 Iterate over the list of images
@@ -38,9 +39,9 @@ for img_name in all_melanoma:
 
     print('\tweaking shadows...')
     # weak effect of nonuniform illumination or shadow
-    image = shading_attenuation_method(image, extract=40, margin=10)
+    image = shading_attenuation_method(image, extract=50, margin=10)
 
-    print('\tcolor augmentation...')
-    # Color augmentation
-    image = shades_of_gray_method(image)
-    imsave('image/Preprocessed_Data/'+img_name, image)
+    print('\tcolor normalization...')
+    # Color normalization
+    image = shades_of_gray_method(image, gamma=1.5)
+    imsave('image/pre-processed_data/'+'shatt_'+img_name, image)

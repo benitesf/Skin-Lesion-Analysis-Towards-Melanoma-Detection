@@ -3,10 +3,10 @@ import numpy as np
 import random
 
 
-def shades_of_gray_method(image):
+def shades_of_gray_method(image, gamma=2.2):
 
     image = img_as_float(image)
-    img = exposure.adjust_gamma(image, gamma=2.2)
+    img = exposure.adjust_gamma(image, gamma=gamma)
 
     """
     Illuminant estimated using Minkowski norm

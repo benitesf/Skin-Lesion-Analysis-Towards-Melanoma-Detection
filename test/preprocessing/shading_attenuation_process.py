@@ -1,9 +1,9 @@
 import sys, os
 
-#sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-#os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
 
 from skimage.color import rgb2hsv, hsv2rgb
 #from skimage.measure import entropy
@@ -246,7 +246,7 @@ Vnewf2 = shatt.in_range(Vnewf2)
 Vnewc3 = shatt.in_range(Vnewc3)
 Vnewf3 = shatt.in_range(Vnewf3)
 
-save_with_retrieve_color(hsv, Vnewc2, Vnewf2, Vnewc3, Vnewf3)
+#save_with_retrieve_color(hsv, Vnewc2, Vnewf2, Vnewc3, Vnewf3)
 
 # Select the image which have least entropy
 Vlist = [V, Vnewc2, Vnewf2, Vnewc3, Vnewf3]
@@ -256,3 +256,4 @@ entropy_vals = [entropy(v) for v in values]
 
 print('entropy: '+str(entropy_vals))
 print('index: '+str(entropy_vals.index(min(entropy_vals))))
+

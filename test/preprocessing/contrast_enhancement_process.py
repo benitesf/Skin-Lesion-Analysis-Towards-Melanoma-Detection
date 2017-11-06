@@ -1,16 +1,16 @@
 import sys, os
 
-#sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-#os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
 
 from skimage import exposure, img_as_float
 from scipy.misc import imread, imsave
 import numpy as np
 
 # Paths and filenames
-filename = 'ISIC_0000096'
+filename = 'ISIC_0000181'
 
 melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_name = filename
@@ -37,30 +37,32 @@ Reading image
 image = imread(melanoma_path + melanoma_name + melanoma_extension)
 image = img_as_float(image)
 
+shape = image.shape
+N = shape[0] + shape[1]
+
 gamma_list = [1.3, 1.5, 1.8, 2.0, 2.2]
 p_list = [2, 4, 6]
 
-for g, p in zip(gamma_list, p_list):
-    F = exposure.adjust_gamma(image, gamma=g)
+for g in gamma_list:
 
+    F = exposure.adjust_gamma(image, gamma=g)
     save_image_gamma_correction(F, gamma=g)
 
-    """
-    Illuminant estimated using Minkowski norm
-    -----------------------------------------
-    """
-    #p = 6
-    shape = F.shape
-    N = shape[0] + shape[1]
+    for p in p_list:
 
-    Re = np.power(np.power(F[:,:,0], p).sum()/N, 1/p)
-    Ge = np.power(np.power(F[:,:,1], p).sum()/N, 1/p)
-    Be = np.power(np.power(F[:,:,2], p).sum()/N, 1/p)
+        """
+        Illuminant estimated using Minkowski norm
+        -----------------------------------------
+        """
+        #p = 6
+        Re = np.power(np.power(F[:,:,0], p).sum()/N, 1/p)
+        Ge = np.power(np.power(F[:,:,1], p).sum()/N, 1/p)
+        Be = np.power(np.power(F[:,:,2], p).sum()/N, 1/p)
 
-    e = np.array([Re, Ge, Be])
-    e_ = np.sqrt((e**2).sum())
-    e_gorro = e/e_
+        e = np.array([Re, Ge, Be])
+        e_ = np.sqrt((e**2).sum())
+        e_gorro = e/e_
 
-    d = 1/e_gorro
+        d = 1/e_gorro
 
-    save_image_enhanced(F, d, p, g)
+        save_image_enhanced(F, d, p, g)
