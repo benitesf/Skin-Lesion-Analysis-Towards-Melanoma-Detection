@@ -1,9 +1,9 @@
 import sys, os
 
-sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-#sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-#os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
 
 from skimage.color import rgb2hsv, hsv2rgb
 #from skimage.measure import entropy
@@ -30,7 +30,7 @@ groundtruth_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
 groundtruth_name = 'ISIC_0010374_segmentation'
 groundtruth_extension = '.png'
 
-pathdir = "memory/pre-processing/illumination_enhacement/"
+pathdir = "memory/pre-processing/illumination_enhancement/"
 
 
 def quadratic_polynomial(Z, coeff):

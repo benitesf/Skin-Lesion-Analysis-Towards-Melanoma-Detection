@@ -1,5 +1,6 @@
 import numpy as np
 from skimage.color import rgb2gray, rgb2hsv, rgb2lab, rgb2luv
+from skimage import img_as_ubyte
 from scipy.stats import skew
 from sklearn.metrics.cluster import entropy
 import time
