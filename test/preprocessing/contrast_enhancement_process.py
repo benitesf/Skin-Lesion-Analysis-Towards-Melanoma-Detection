@@ -10,7 +10,7 @@ from scipy.misc import imread, imsave
 import numpy as np
 
 # Paths and filenames
-filename = 'ISIC_0000000'
+filename = 'ISIC_0010100'
 
 melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_name = filename
@@ -41,14 +41,16 @@ image = img_as_float(image)
 shape = image.shape
 N = shape[0] + shape[1]
 
-F = exposure.adjust_gamma(image, gamma=g)
-save_image_gamma_correction(F, gamma=g)
+gamma = 2.2
+
+F = exposure.adjust_gamma(image, gamma=gamma)
+save_image_gamma_correction(F, gamma=gamma)
 
 """
 Illuminant estimated using Minkowski norm
 -----------------------------------------
 """
-#p = 6
+p = 6
 Re = np.power(np.power(F[:,:,0], p).sum()/N, 1/p)
 Ge = np.power(np.power(F[:,:,1], p).sum()/N, 1/p)
 Be = np.power(np.power(F[:,:,2], p).sum()/N, 1/p)
@@ -59,4 +61,4 @@ e_gorro = e/e_
 
 d = 1/e_gorro
 
-save_image_enhanced(F, d, p, g)
+save_image_enhanced(F, d, p, gamma)
