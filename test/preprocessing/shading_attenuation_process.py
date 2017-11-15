@@ -6,7 +6,6 @@ os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detectio
 #os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
 
 from skimage.color import rgb2hsv, hsv2rgb
-#from skimage.measure import entropy
 from skimage import img_as_ubyte
 from scipy.misc import imread, imsave
 from preprocessing import shadding_attenuation as shatt
@@ -30,7 +29,8 @@ groundtruth_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
 groundtruth_name = 'ISIC_0010374_segmentation'
 groundtruth_extension = '.png'
 
-pathdir = "memory/pre-processing/illumination_enhancement/"
+#pathdir = "memory/pre-processing/illumination_enhancement/"
+pathdir = "resultados/"
 
 
 def quadratic_polynomial(Z, coeff):
@@ -161,7 +161,7 @@ gt = imread(groundtruth_path + groundtruth_name + groundtruth_extension)
 hsv = rgb2hsv(image)
 V = np.copy(hsv[:, :, 2])
 
-#imsave(pathdir + melanoma_name + '_V.png', V)
+imsave(pathdir + melanoma_name + '_V.png', V)
 
 extract = 50  # Number of pixel to extract from the corners 20x20
 margin = 10  # Margin from the borders
@@ -190,6 +190,7 @@ Saving sampling pixels
 """
 #save_sampling_pixels(gt)
 
+
 """
 Quadratic and cubic polynomial
 ------------------------------
@@ -214,7 +215,7 @@ coefff3 = np.linalg.lstsq(Af3, Zf)[0]
 Saving quadratic and cubic polynomial figure
 --------------------------------------------
 """
-#save_polynomial_figure(coeffc2, coefff2, coeffc3, coefff3, shape)
+save_polynomial_figure(coeffc2, coefff2, coeffc3, coefff3, shape)
 
 """
 Processed
@@ -246,7 +247,7 @@ Vnewf2 = shatt.in_range(Vnewf2)
 Vnewc3 = shatt.in_range(Vnewc3)
 Vnewf3 = shatt.in_range(Vnewf3)
 
-#save_with_retrieve_color(hsv, Vnewc2, Vnewf2, Vnewc3, Vnewf3)
+save_with_retrieve_color(hsv, Vnewc2, Vnewf2, Vnewc3, Vnewf3)
 
 # Select the image which have least entropy
 Vlist = [V, Vnewc2, Vnewf2, Vnewc3, Vnewf3]

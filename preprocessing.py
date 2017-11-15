@@ -21,7 +21,7 @@ melanoma_extension = 'jpg'
 
 all_melanoma = sorted(util.dirhandler.get_file_name_dir(melanoma_path, melanoma_extension))
 
-all_melanoma = all_melanoma[60:62]
+all_melanoma = all_melanoma[0:1]
 
 """
 Iterate over the list of images
@@ -43,5 +43,5 @@ for img_name in all_melanoma:
 
     print('\tcolor normalization...')
     # Color normalization
-    image = shades_of_gray_method(image, gamma=1.5)
-    imsave('resultados/preprocessed/' + img_name, image)
+    image = shades_of_gray_method(image, gamma=2.2)
+    imsave('resultados/' + img_name, image)

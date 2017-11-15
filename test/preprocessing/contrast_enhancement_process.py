@@ -10,24 +10,25 @@ from scipy.misc import imread, imsave
 import numpy as np
 
 # Paths and filenames
-filename = 'ISIC_0000181'
+filename = 'ISIC_0000000'
 
 melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_name = filename
 melanoma_extension = '.jpg'
 
-pathdir = 'memory/pre-processing/contrast_enhancement/'
-
+#pathdir = 'memory/pre-processing/contrast_enhancement/'
+pathdir = 'resultados/'
 
 def save_image_gamma_correction(X, gamma):
     imsave(pathdir + filename + '_gamma_corrected_' + str(gamma) + melanoma_extension, X)
 
 
 def save_image_enhanced(X, d, p, g):
-    X[:, :, 0] = X[:, :, 0] * d[0]
-    X[:, :, 1] = X[:, :, 1] * d[1]
-    X[:, :, 2] = X[:, :, 2] * d[2]
-    imsave(pathdir + filename + '_enhanced_g' + str(g) + '_p' + str(p) + melanoma_extension, X)
+    E = np.copy(X)
+    E[:, :, 0] = E[:, :, 0] * d[0]
+    E[:, :, 1] = E[:, :, 1] * d[1]
+    E[:, :, 2] = E[:, :, 2] * d[2]
+    imsave(pathdir + filename + '_enhanced_g' + str(g) + '_p' + str(p) + melanoma_extension, E)
 
 
 """
@@ -40,29 +41,22 @@ image = img_as_float(image)
 shape = image.shape
 N = shape[0] + shape[1]
 
-gamma_list = [1.3, 1.5, 1.8, 2.0, 2.2]
-p_list = [2, 4, 6]
+F = exposure.adjust_gamma(image, gamma=g)
+save_image_gamma_correction(F, gamma=g)
 
-for g in gamma_list:
+"""
+Illuminant estimated using Minkowski norm
+-----------------------------------------
+"""
+#p = 6
+Re = np.power(np.power(F[:,:,0], p).sum()/N, 1/p)
+Ge = np.power(np.power(F[:,:,1], p).sum()/N, 1/p)
+Be = np.power(np.power(F[:,:,2], p).sum()/N, 1/p)
 
-    F = exposure.adjust_gamma(image, gamma=g)
-    save_image_gamma_correction(F, gamma=g)
+e = np.array([Re, Ge, Be])
+e_ = np.sqrt((e**2).sum())
+e_gorro = e/e_
 
-    for p in p_list:
+d = 1/e_gorro
 
-        """
-        Illuminant estimated using Minkowski norm
-        -----------------------------------------
-        """
-        #p = 6
-        Re = np.power(np.power(F[:,:,0], p).sum()/N, 1/p)
-        Ge = np.power(np.power(F[:,:,1], p).sum()/N, 1/p)
-        Be = np.power(np.power(F[:,:,2], p).sum()/N, 1/p)
-
-        e = np.array([Re, Ge, Be])
-        e_ = np.sqrt((e**2).sum())
-        e_gorro = e/e_
-
-        d = 1/e_gorro
-
-        save_image_enhanced(F, d, p, g)
+save_image_enhanced(F, d, p, g)
