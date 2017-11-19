@@ -39,22 +39,22 @@ def values(blk, kernels):
 
 
 def rgb_features(block):
-    return [*mean(block), *std_dev(block), *skew_(block), *energy(block), *entropy_(block)]
+    return [*mean(block), *std_dev(block), *skew_(block), *variance(block), *entropy_(block)]
 
 
 def hsv_features(block):
     blk = rgb2hsv(block)
-    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_(blk)]
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *variance(blk), *entropy_(blk)]
 
 
 def lab_features(block):
     blk = rgb2lab(block)
-    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_(blk)]
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *variance(blk), *entropy_(blk)]
 
 
 def luv_features(block):
     blk = rgb2luv(block)
-    return [*mean(blk), *std_dev(blk), *skew_(blk), *energy(blk), *entropy_(blk)]
+    return [*mean(blk), *std_dev(blk), *skew_(blk), *variance(blk), *entropy_(blk)]
 
 
 def mean(block):
@@ -96,14 +96,22 @@ def skew_(block):
     return [a, b, c]
 
 
-def energy(block):
-    a = np.sqrt((block[:, :, 0] ** 2).sum())
-    b = np.sqrt((block[:, :, 1] ** 2).sum())
-    c = np.sqrt((block[:, :, 2] ** 2).sum())
+def variance(block):
+		"""
+		Function to calculate the variance of the block		
+
+		"""
+    a = np.var(block[:, :, 0])
+    b = np.var(block[:, :, 1])
+    c = np.var(block[:, :, 2])
     return [a, b, c]
 
 
 def entropy_(block):
+		"""
+		Function to calculate the variance of the block		
+	
+		"""	
     a = entropy(block[:, :, 0])
     b = entropy(block[:, :, 1])
     c = entropy(block[:, :, 2])
