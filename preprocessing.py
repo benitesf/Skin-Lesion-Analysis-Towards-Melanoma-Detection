@@ -44,4 +44,4 @@ for img_name in all_melanoma:
     print('\tcolor normalization...')
     # Color normalization
     image = shades_of_gray_method(image, gamma=2.2)
-    imsave('resultados/' + img_name, image)
+    imsave('resultados/preprocessed/' + img_name, image)

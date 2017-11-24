@@ -2,7 +2,7 @@
 #$ -N preprocessing
 #$ -e salidas/err/preprocessing_err.txt
 #$ -o salidas/out/preprocessing_out.txt
-#$ -q v1,lola@lola01,lola@lola02
+#$ -q v2
 #$ -t 1-1
 #$ -cwd
 
@@ -19,7 +19,7 @@
 ##cp -r $p/* .
 # copiar todos los datos a "." que es la carpeta del nodo
 
-python3 preprocessing.py
+/anaconda/anaconda3/bin/python preprocessing.py
 
 #tar -czvf resultados$id.tar.gz *.jpg
 #cp resultados$id.tar.gz $p/results/resultados$id.tar.gz
