@@ -21,7 +21,6 @@ melanoma_extension = 'jpg'
 
 all_melanoma = sorted(util.dirhandler.get_file_name_dir(melanoma_path, melanoma_extension))
 
-all_melanoma = all_melanoma[0:1]
 
 """
 Iterate over the list of images
