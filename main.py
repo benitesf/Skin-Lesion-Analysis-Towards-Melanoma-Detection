@@ -55,7 +55,7 @@ Training Neural Network
 """
 
 # Training the neural network with 83.3 % of the array features
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.166)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.16666)
 
 classifier = neural_network()
 start_t = time.time()
@@ -74,10 +74,10 @@ score_train = classifier.score(X_train, y_train)
 Classify images
 ---------------
 """
-melanoma_list = [melanoma_test[0]]
-ground_list = [ground_test[0]]
+melanoma_list = melanoma_test
+ground_list = ground_test
 
-seg, tim = classify(melanoma_list, ground_list, feature, classifier)
+seg, tim = classify(melanoma_list, ground_list, feature, classifier, block=False)
 
 """
 ---------------
@@ -107,7 +107,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'resultados/first_test/'
+path_save = 'resultados/red1/sin_preprocesar/'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)

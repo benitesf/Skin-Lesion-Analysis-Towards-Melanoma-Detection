@@ -97,10 +97,10 @@ def skew_(block):
 
 
 def variance(block):
-		"""
-		Function to calculate the variance of the block		
+    """
+    Function to calculate the variance of the block
 
-		"""
+    """
     a = np.var(block[:, :, 0])
     b = np.var(block[:, :, 1])
     c = np.var(block[:, :, 2])
@@ -108,10 +108,10 @@ def variance(block):
 
 
 def entropy_(block):
-		"""
-		Function to calculate the variance of the block		
-	
-		"""	
+    """
+    Function to calculate the variance of the block
+
+    """
     a = entropy(block[:, :, 0])
     b = entropy(block[:, :, 1])
     c = entropy(block[:, :, 2])

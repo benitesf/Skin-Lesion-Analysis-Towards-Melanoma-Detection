@@ -46,9 +46,9 @@ def values(blk, kernels):
     hsv = hsv_features(blk) # 15
     lab = lab_features(blk) # 15
     luv = luv_features(blk) # 15
-    # start_time = time.time()
+    #start_time = time.time()
     gab = gabor_filter(blk, kernels) # 4
-    # print("--- %s seconds ---" % (time.time() - start_time))
+    #print("--- %s seconds ---" % (time.time() - start_time))
     return [*rgb, *hsv, *lab, *luv, *gab] # 64
 
 
@@ -111,10 +111,10 @@ def skew_(block):
 
 
 def variance(block):
-		"""
-		Function to calculate the variance of the block
+    """
+    Function to calculate the variance of the block
 
-		"""
+    """
     a = np.var(block[:, :, 0])
     b = np.var(block[:, :, 1])
     c = np.var(block[:, :, 2])
@@ -122,10 +122,10 @@ def variance(block):
 
 
 def entropy_(block):
-		"""
-		Function to calculate the entropy of the block
+    """
+    Function to calculate the entropy of the block
 
-		"""
+    """
     a = entropy(block[:, :, 0])
     b = entropy(block[:, :, 1])
     c = entropy(block[:, :, 2])

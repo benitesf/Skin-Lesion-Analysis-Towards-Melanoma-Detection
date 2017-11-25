@@ -100,6 +100,7 @@ def fourier(kernel):
 Genera el banco de filtros y su plotting
 ----------------------------------------
 """
+import sys
 fmax = 0.5
 ns = 4
 nd = 4

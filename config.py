@@ -13,7 +13,7 @@ ground_extension  = "png"
 """
 Parameters for the data set
 """
-nImage = 388  # Number of images to work (1000)
+nImage = 400  # Number of images to work (1000)
 nSample = 40    # Number of samples per each image (40)
 block = 25       # Block dimension is 25x25
 nCells = 65     # Number of cells by each field of the training set
@@ -22,8 +22,8 @@ nCells = 65     # Number of cells by each field of the training set
 Parameters for gabor kernels
 """
 # First method
-frequency = [0.5, 0.9]
-theta = [0, 45]
+frequency = [0.4]
+theta = [0, 45, 90, 135]
 gabor_params = [frequency, theta]
 
 # Second method

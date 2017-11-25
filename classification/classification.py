@@ -62,7 +62,7 @@ def per_pixel(img, img_seg, row, col, feature, classifier):
 
 def local_error(confmat):
     """
-    Calculates the accuracy per image
+    Calculates the accuracy by each image
 
     Parameters
     ----------
