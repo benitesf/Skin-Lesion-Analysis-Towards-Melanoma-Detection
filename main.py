@@ -74,10 +74,10 @@ score_train = classifier.score(X_train, y_train)
 Classify images
 ---------------
 """
-melanoma_list = melanoma_test
-ground_list = ground_test
+melanoma_list = melanoma_test[0:5]
+ground_list = ground_test[0:5]
 
-seg, tim = classify(melanoma_list, ground_list, feature, classifier, block=False)
+seg, tim = classify(melanoma_list, ground_list, feature, classifier, block=True)
 
 """
 ---------------
@@ -107,7 +107,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'resultados/red1/sin_preprocesar/'
+path_save = 'resultados/red1/sin_preprocesar/test/'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)
