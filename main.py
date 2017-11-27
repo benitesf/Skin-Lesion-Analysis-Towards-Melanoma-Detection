@@ -77,7 +77,7 @@ Classify images
 melanoma_list = melanoma_test[0:5]
 ground_list = ground_test[0:5]
 
-seg, tim = classify(melanoma_list, ground_list, feature, classifier, block=True)
+seg, tim, dim = classify(melanoma_list, ground_list, feature, classifier, block=True)
 
 """
 ---------------
@@ -92,13 +92,24 @@ confmat = confusion_matrix(seg, ground_list)
 local_err = local_error(confmat)
 sensitivity, specificity, accuracy = total_error(local_err)
 
+"""
+---------
+"""
+
+"""
+Measure of times of execution
+-----------------------------
+"""
 tim = np.array(tim)/60
+dim = np.array(dim)
+dim = tim / (dim[0:,0] * dim[0:,1])
+
 total_time = tim.sum()
 mean_time = tim.mean()
 std_time = tim.std()
 
 """
----------
+-----------------------------
 """
 
 """
@@ -133,9 +144,11 @@ with open(path_save + 'Measures.txt', 'w') as output:
     output.write('\tTime: ' + str(feature_t) + '\n')
     output.write('Neural Network Training:\n')
     output.write('\tTime: ' + str(classifier_t) + '\n')
-    output.write('Segmentation:\n')
+    output.write('Segmentation by image:\n')
     output.write('\tTotal: ' + str(total_time) + '\n')
     output.write('\tMean: ' + str(mean_time) + '+-' + str(std_time) + '\n')
+    output.write('Segmentation by pixel:\n')
+    output.write('\tMean: ' + str(dim.mean()) + '+-' + str(dim.std()) + '\n')
     output.write('-------------------------------------------------------------------------\n\n')
     output.write('Score:\n')
     output.write('\tX_train: ' + str(score_train) + '\n')

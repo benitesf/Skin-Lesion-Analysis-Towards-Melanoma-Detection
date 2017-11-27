@@ -12,6 +12,7 @@ Implements methods to classify images
 def classify(melanoma, ground, feature, classifier, block=True):
     seg = []
     tim = []
+    dim = []
 
     for (melanoma_item, ground_item) in zip(melanoma, ground):
         print('Segmentating...')
@@ -19,6 +20,8 @@ def classify(melanoma, ground, feature, classifier, block=True):
         img = Image(cfg.melanoma_path + melanoma_item, cfg.ground_path + ground_item, cfg.block)
         size = img.get_shape()
         portion = img.get_portion()
+
+        dim.append(size)
 
         img_seg = np.zeros((size[0], size[1]))
 
@@ -34,7 +37,7 @@ def classify(melanoma, ground, feature, classifier, block=True):
             seg.append(per_pixel(img, img_seg, row, col, feature, classifier))
             tim.append(time.time() - st)
 
-    return seg, tim
+    return seg, tim, dim
 
 
 def per_block(img, img_seg, row, col, feature, classifier):
