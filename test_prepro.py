@@ -151,8 +151,8 @@ image = imread(melanoma_path + 'ISIC_0000386.jpg')
 hsv = rgb2hsv(image)
 V = np.copy(hsv[:, :, 2])
 
-extract = 40  # Number of pixel to extract from the corners 20x20
-margin = 10  # Margin from the borders
+extract = 80  # Number of pixel to extract from the corners 20x20
+margin = 20  # Margin from the borders
 
 shape = image.shape[0:2]
 

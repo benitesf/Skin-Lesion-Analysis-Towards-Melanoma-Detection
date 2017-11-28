@@ -24,7 +24,7 @@ all_melanoma = sorted(util.dirhandler.get_file_name_dir(melanoma_path, melanoma_
 # Parameters
 extract = 50
 margin = 10
-gamma = 2.2
+gamma = 1/2.2
 
 print('*************************************************************')
 print('********************* Preprocessing *************************')

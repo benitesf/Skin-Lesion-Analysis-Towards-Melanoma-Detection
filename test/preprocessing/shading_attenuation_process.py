@@ -22,11 +22,11 @@ import numpy as np
 
 # Paths and filenames
 melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
-melanoma_name = 'ISIC_0010374'
+melanoma_name = 'ISIC_0000198'
 melanoma_extension = '.jpg'
 
 groundtruth_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
-groundtruth_name = 'ISIC_0010374_segmentation'
+groundtruth_name = 'ISIC_0000198_segmentation'
 groundtruth_extension = '.png'
 
 #pathdir = "memory/pre-processing/illumination_enhancement/"
@@ -163,8 +163,8 @@ V = np.copy(hsv[:, :, 2])
 
 imsave(pathdir + melanoma_name + '_V.png', V)
 
-extract = 50  # Number of pixel to extract from the corners 20x20
-margin = 10  # Margin from the borders
+extract = 70  # Number of pixel to extract from the corners 20x20
+margin = 20  # Margin from the borders
 
 shape = image.shape[0:2]
 
