@@ -68,7 +68,7 @@ def plot_sum_gabor_fourier_2d(sum_kernel, sum_fourier):
     fig.suptitle('Suma de los filtros de Gabor y Fourier', fontsize=10)
 
     ax = axes[0]
-    ax.imshow(sum_kernel)
+    ax.imshow(sum_kernel, cmap='Greys')
     ax.axis('off')
 
     ax = axes[1]
@@ -101,8 +101,8 @@ Genera el banco de filtros y su plotting
 ----------------------------------------
 """
 import sys
-fmax = 0.5
-ns = 4
+fmax = 1/2
+ns = 2
 nd = 4
 v = 2
 b = 1.177
@@ -128,7 +128,7 @@ kernels_real = []
 for kernel in kernels:
     kernels_real.append(kernel.real)
 
-plot_gabor_fourier_2d(kernels_real, fouriers, ns, nd*2)
+#plot_gabor_fourier_2d(kernels_real, fouriers, ns, nd*2)
 
 """
 ----------------------------------------
@@ -159,9 +159,10 @@ sum_kernel = np.zeros((100,100))
 for val in kernel_resize:
     sum_kernel += val
 
+plot_surface2d(sum_fourier)
+
 #plot_sum_gabor_fourier_2d(sum_kernel, sum_fourier)
 
 """
 -------------------------------------------------------
 """
-

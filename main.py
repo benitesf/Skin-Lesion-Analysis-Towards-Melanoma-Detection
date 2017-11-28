@@ -43,7 +43,7 @@ feature = FeatureExtraction()
 
 start_t = time.time()
 X, y = feature.first_method(melanoma_train, ground_train)
-feature_t = (time.time() - start_t)/60
+feature_t = (time.time() - start_t)/60 # minutes
 
 """
 ------------------
@@ -60,7 +60,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.16666)
 classifier = neural_network()
 start_t = time.time()
 classifier.fit(X_train, y_train)
-classifier_t = (time.time() - start_t)/60
+classifier_t = (time.time() - start_t)/60 # minutes
 
 score_test = classifier.score(X_test, y_test)
 score_train = classifier.score(X_train, y_train)
@@ -74,10 +74,11 @@ score_train = classifier.score(X_train, y_train)
 Classify images
 ---------------
 """
-melanoma_list = melanoma_test[0:5]
-ground_list = ground_test[0:5]
+melanoma_list = melanoma_test
+ground_list = ground_test
 
 seg, tim, dim = classify(melanoma_list, ground_list, feature, classifier, block=True)
+
 
 """
 ---------------
@@ -100,13 +101,17 @@ sensitivity, specificity, accuracy = total_error(local_err)
 Measure of times of execution
 -----------------------------
 """
-tim = np.array(tim)/60
+tim = np.array(tim) # sec
 dim = np.array(dim)
-dim = tim / (dim[0:,0] * dim[0:,1])
+dim = dim[0:,0] * dim[0:,1]
+t_by_pix = (tim*(10**6)) / dim # microsec / pix
 
-total_time = tim.sum()
-mean_time = tim.mean()
-std_time = tim.std()
+tim /= 60 # min
+
+total_time = (tim/60).sum() # total hours
+mean_time = tim.mean() # mean minutes
+std_time = tim.std() # std minutes
+
 
 """
 -----------------------------
@@ -140,29 +145,32 @@ with open(path_save + 'Measures.txt', 'w') as output:
     output.write('Final function value: ' + str(classifier.loss_)+'\n\n')
     output.write('-------------------------------------------------------------------------\n')
     output.write('Time of execution: \n')
+    output.write('-------------------------------------------------------------------------\n\n')
     output.write('Feature Extraction: \n')
-    output.write('\tTime: ' + str(feature_t) + '\n')
+    output.write('\tTime: ' + str(feature_t) + ' min\n')
     output.write('Neural Network Training:\n')
-    output.write('\tTime: ' + str(classifier_t) + '\n')
+    output.write('\tTime: ' + str(classifier_t) + ' min\n')
     output.write('Segmentation by image:\n')
-    output.write('\tTotal: ' + str(total_time) + '\n')
-    output.write('\tMean: ' + str(mean_time) + '+-' + str(std_time) + '\n')
+    output.write('\tTotal: ' + str(total_time) + ' hrs\n')
+    output.write('\tMean: ' + str(mean_time) + '+-' + str(std_time) + ' min\n')
     output.write('Segmentation by pixel:\n')
-    output.write('\tMean: ' + str(dim.mean()) + '+-' + str(dim.std()) + '\n')
+    output.write('\tMean: ' + str(t_by_pix.mean()) + '+-' + str(t_by_pix.std()) + ' mircosec/pix\n')
     output.write('-------------------------------------------------------------------------\n\n')
     output.write('Score:\n')
     output.write('\tX_train: ' + str(score_train) + '\n')
     output.write('\tX_test: ' + str(score_test) + '\n')
-    output.write('-------------------------------------------------------------------------\n')
+    output.write('-------------------------------------------------------------------------\n\n')
     output.write('Total error\n')
     output.write('\tSensitivity: ' + str(sensitivity[0]) + '+-' + str(sensitivity[1]) + '\n')
     output.write('\tSpecificity: ' + str(specificity[0]) + '+-' + str(specificity[1]) + '\n')
     output.write('\tAccuracy: ' + str(accuracy[0]) + '+-' + str(accuracy[1]) + '\n')
     output.write('-------------------------------------------------------------------------\n\n')
-    output.write('Local error\n')
+    output.write('Numero total de pixeles: ' + str(dim.sum()) + '\n')
+    output.write('-------------------------------------------------------------------------\n\n')
+    output.write('Local error: \n')
     output.write('\t[TP\tFP\tFN\tTN]|[sensitivity, specificity, accuracy]\t\n')
-    for a, g, l in zip(confmat, ground_list, local_err):
-        output.write(str(a) + '\t' + g + '\t' + str(l) + '\n')
+    for a, g, l, t, d in zip(confmat, ground_list, local_err, tim, dim):
+        output.write(str(a) + '\t' + g + '\t' + str(l) + '\t' + str(t) + ' min' + '\t' + str(d) + ' pix\n')
 
 
 """
