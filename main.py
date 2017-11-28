@@ -74,8 +74,8 @@ score_train = classifier.score(X_train, y_train)
 Classify test images
 ---------------
 """
-melanoma_list = melanoma_test[0:1]
-ground_list = ground_test[0:1]
+melanoma_list = melanoma_test[0:5]
+ground_list = ground_test[0:5]
 
 seg, tim, dim = classify(melanoma_list, ground_list, feature, classifier, block=True)
 
@@ -182,8 +182,8 @@ with open(path_save + 'Measures.txt', 'w') as output:
 Classify train images
 ---------------------
 """
-melanoma_list = melanoma_train[0:1]
-ground_list = ground_train[0:1]
+melanoma_list = melanoma_train[0:5]
+ground_list = ground_train[0:5]
 
 seg, tim, dim = classify(melanoma_list, ground_list, feature, classifier, block=True)
 
