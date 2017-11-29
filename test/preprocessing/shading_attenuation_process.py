@@ -1,9 +1,9 @@
 import sys, os
 
-sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-#sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
-#os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#sys.path.append("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+#os.chdir("/home/linux1/Escritorio/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+sys.path.append("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
+os.chdir("/home/mrobot/Documentos/TFG/code/Skin-Lesion-Analysis-Towards-Melanoma-Detection/")
 
 from skimage.color import rgb2hsv, hsv2rgb
 from skimage import img_as_ubyte
@@ -22,11 +22,11 @@ import numpy as np
 
 # Paths and filenames
 melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
-melanoma_name = 'ISIC_0000198'
+melanoma_name = 'ISIC_0014762'
 melanoma_extension = '.jpg'
 
 groundtruth_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
-groundtruth_name = 'ISIC_0000198_segmentation'
+groundtruth_name = 'ISIC_0014762_segmentation'
 groundtruth_extension = '.png'
 
 #pathdir = "memory/pre-processing/illumination_enhancement/"
@@ -163,8 +163,8 @@ V = np.copy(hsv[:, :, 2])
 
 imsave(pathdir + melanoma_name + '_V.png', V)
 
-extract = 70  # Number of pixel to extract from the corners 20x20
-margin = 20  # Margin from the borders
+extract = 50  # Number of pixel to extract from the corners 20x20
+margin = 10  # Margin from the borders
 
 shape = image.shape[0:2]
 
@@ -188,9 +188,9 @@ for j in range(0, Zf.shape[0]):
 Saving sampling pixels
 ----------------------
 """
-#save_sampling_pixels(gt)
+save_sampling_pixels(gt)
 
-
+sys.exit()
 """
 Quadratic and cubic polynomial
 ------------------------------
