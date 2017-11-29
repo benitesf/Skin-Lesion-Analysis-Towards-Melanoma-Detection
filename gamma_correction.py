@@ -6,7 +6,7 @@ import util.dirhandler
 Get name images to correction
 -----------------------------
 """
-melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
+melanoma_path = 'image/ISIC-2017_Training_Data_Clean_Preprocessed0/'
 melanoma_extension = 'jpg'
 
 all_melanoma = sorted(util.dirhandler.get_file_name_dir(melanoma_path, melanoma_extension))
