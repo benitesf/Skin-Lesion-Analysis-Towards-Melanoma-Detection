@@ -42,7 +42,7 @@ Feature Extraction
 feature = FeatureExtraction()
 
 start_t = time.time()
-X, y = feature.first_method(melanoma_train, ground_train)
+X, y = feature.second_method(melanoma_train, ground_train)
 feature_t = (time.time() - start_t)/60 # minutes
 
 """
@@ -123,7 +123,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'resultados/red1/preprocesado/test/'
+path_save = 'resultados/red2/sin_preprocesar/test/'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)
@@ -131,7 +131,7 @@ for s, f in zip(seg, files):
 
 with open(path_save + 'Measures.txt', 'w') as output:
     output.write('---------------\n')
-    output.write('---- RED 1 ----\n')
+    output.write('---- RED 2 ----\n')
     output.write('---------------\n\n')
     output.write('Data Base: ' + cfg.melanoma_path + '\n')
     output.write('Number of images: ' + str(cfg.nImage) + '\n')
@@ -231,7 +231,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'resultados/red1/preprocesado/train/'
+path_save = 'resultados/red2/sin_preprocesar/train/'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)
@@ -239,7 +239,7 @@ for s, f in zip(seg, files):
 
 with open(path_save + 'Measures.txt', 'w') as output:
     output.write('---------------\n')
-    output.write('---- RED 1 ----\n')
+    output.write('---- RED 2 ----\n')
     output.write('---------------\n\n')
     output.write('Data Base: ' + cfg.melanoma_path + '\n')
     output.write('Number of images: ' + str(cfg.nImage) + '\n')
