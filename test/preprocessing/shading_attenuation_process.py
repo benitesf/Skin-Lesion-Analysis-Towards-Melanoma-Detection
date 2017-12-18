@@ -22,11 +22,11 @@ import numpy as np
 
 # Paths and filenames
 melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
-melanoma_name = 'ISIC_0014762'
+melanoma_name = 'ISIC_0015038'
 melanoma_extension = '.jpg'
 
 groundtruth_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
-groundtruth_name = 'ISIC_0014762_segmentation'
+groundtruth_name = 'ISIC_0015038_segmentation'
 groundtruth_extension = '.png'
 
 #pathdir = "memory/pre-processing/illumination_enhancement/"
@@ -190,7 +190,6 @@ Saving sampling pixels
 """
 save_sampling_pixels(gt)
 
-sys.exit()
 """
 Quadratic and cubic polynomial
 ------------------------------
