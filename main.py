@@ -123,7 +123,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'resultados/red3/preprocesado/test/'
+path_save = 'resultados/red3/sin_preprocesar/test/'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)
@@ -231,7 +231,7 @@ Saving values
 """
 files = [f.split('.')[0]+'_classified.jpg' for f in melanoma_list]
 
-path_save = 'resultados/red3/preprocesado/train/'
+path_save = 'resultados/red3/sin_preprocesar/train/'
 
 for s, f in zip(seg, files):
     img = Image.fromarray(s)

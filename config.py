@@ -3,7 +3,7 @@ Paths and extension for images
 ------------------------------
 """
 
-melanoma_path = 'image/ISIC-2017_Training_Data_Clean_Preprocessed/'
+melanoma_path = 'image/ISIC-2017_Training_Data_Clean/'
 melanoma_extension = 'jpg'
 
 ground_path = 'image/ISIC-2017_Training_Part1_GroundTruth_Clean/'
